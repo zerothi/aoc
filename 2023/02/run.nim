@@ -1,7 +1,7 @@
 import std/strutils
 import std/re
 import std/sugar
-import ../readfile
+import ../utils
 
 
 # Create a type of the cubes held

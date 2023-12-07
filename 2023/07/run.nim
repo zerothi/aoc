@@ -2,7 +2,7 @@ import std/strutils
 import std/algorithm
 import std/sequtils
 import std/sugar
-import ../readfile
+import ../utils
 
 type
   HandType = enum

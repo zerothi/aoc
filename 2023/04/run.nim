@@ -3,7 +3,7 @@ import std/math
 import std/deques
 import std/sequtils
 import std/strutils
-import ../readfile
+import ../utils
 
 const sortInt = system.cmp[int]
 

@@ -2,7 +2,7 @@ import std/re
 import std/sugar
 import std/strutils
 import std/deques
-import ../readfile
+import ../utils
 
 
 type

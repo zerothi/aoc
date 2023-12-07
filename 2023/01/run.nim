@@ -1,7 +1,7 @@
 import std/sugar
 import std/strutils
 import std/re
-import ../readfile
+import ../utils
 
 
 proc isint(s: string): bool =

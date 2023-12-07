@@ -2,7 +2,7 @@ import std/algorithm
 import std/strutils
 import std/sequtils
 import std/sugar
-import ../readfile
+import ../utils
 
 # Read the file
 var

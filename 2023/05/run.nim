@@ -3,7 +3,7 @@ import std/algorithm
 import std/sequtils
 import std/sugar
 import std/deques
-import ../readfile
+import ../utils
 
 type
   Range = object
