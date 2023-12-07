@@ -29,11 +29,9 @@ type
 
 func len(rng: Range): int = rng.length
 func End(rng: Range): int = rng.start + rng.length
-func len(map: Map): int = map.length
 func End(map: Map): int = map.source + map.length
 
 func len(maps: Maps): int = maps.list.len
-func len(almanac: Almanac): int = almanac.list.len
 
 # Easier additions of Maps and Map
 #func add(maps: Maps, map: Map) =
@@ -196,11 +194,6 @@ iterator loopRange(seeds: seq[int]): Range =
   while idx + 1 < seeds.len:
     yield Range(start: seeds[idx], length: seeds[idx+1])
     inc idx, 2
-
-iterator loopSeeds(rng: Range): int =
-  let start = rng.start - 1
-  for i in 1..rng.length:
-    yield start + i
 
 echo "Seeds = "
 echo seeds
