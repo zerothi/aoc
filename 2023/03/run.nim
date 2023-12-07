@@ -2,6 +2,7 @@ import std/re
 import std/sugar
 import std/strutils
 import std/deques
+import ../readfile
 
 
 type
@@ -98,35 +99,31 @@ proc prodOverlaps(lines: Deque[Line], line: Line): int =
 
 
 # Read the file
-var file: File
-var line: string
 var sum1, sum2: int = 0
-var lines: Deque[Line]
-if file.open("input"):
-  lines = initDeque[Line](3)
+var lines: Deque[Line] = initDeque[Line](3)
 
-  while file.readLine(line):
-    if lines.len == 3:
-      # pop before we add the nex line
-      discard lines.popFirst
+for line in fileLines("input"):
+  if lines.len == 3:
+    # pop before we add the nex line
+    discard lines.popFirst
 
-    lines.addLast(parseLine(line))
+  lines.addLast(parseLine(line))
 
-    case lines.len:
-      of 2:
-        sum1 += lines.sumOverlaps(lines[0])
-        sum2 += lines.prodOverlaps(lines[0])
-      of 3:
-        sum1 += lines.sumOverlaps(lines[1])
-        sum2 += lines.prodOverlaps(lines[1])
-      else:
-        discard
-        
-  # Last line needs to be added
-  discard lines.popFirst
-  assert lines.len == 2
-  sum1 += lines.sumOverlaps(lines[1])
-  sum2 += lines.prodOverlaps(lines[1])
+  case lines.len:
+    of 2:
+      sum1 += lines.sumOverlaps(lines[0])
+      sum2 += lines.prodOverlaps(lines[0])
+    of 3:
+      sum1 += lines.sumOverlaps(lines[1])
+      sum2 += lines.prodOverlaps(lines[1])
+    else:
+      discard
+      
+# Last line needs to be added
+discard lines.popFirst
+assert lines.len == 2
+sum1 += lines.sumOverlaps(lines[1])
+sum2 += lines.prodOverlaps(lines[1])
 
 echo "First " & $sum1
 echo "Second " & $sum2

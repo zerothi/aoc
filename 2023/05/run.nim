@@ -3,18 +3,7 @@ import std/algorithm
 import std/sequtils
 import std/sugar
 import std/deques
-
-
-iterator fileLines(file: File): string =
-  var line: string
-  while file.readLine(line):
-    yield line
-
-iterator fileLines(file: string): string =
-  var fh: File
-  if fh.open(file):
-    for line in fh.fileLines:
-      yield line
+import ../readfile
 
 type
   Range = object
@@ -86,7 +75,6 @@ proc getDestination(maps: Maps, source: Range): seq[Range] =
   missing.addLast(source)
   for map in maps.list:
     let n_missing = missing.len
-    echo "running map with " & $n_missing & " ranges"
     # Only loop that many times
     for i in 1..n_missing:
 
@@ -94,7 +82,6 @@ proc getDestination(maps: Maps, source: Range): seq[Range] =
       let over = map.getOverlapping(rng)
       n = over.len
       if over.len > 0:
-        echo "found overlapping " & $over.len & " / " & $rng.len & " elements"
         result.add(over)
       
       for r in map.getNonOverlapping(rng):

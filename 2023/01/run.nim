@@ -1,6 +1,7 @@
 import std/sugar
 import std/strutils
 import std/re
+import ../readfile
 
 
 proc isint(s: string): bool =
@@ -90,10 +91,7 @@ echo calibration2(lines) == 281
 
 echo "Calibration (1, 2) value:"
 lines = collect:
-  var file: File
-  var line: string
-  if file.open("input"):
-    while file.readLine(line):
-      line
+  for line in fileLines("input"):
+    line
 echo calibration1(lines)
 echo calibration2(lines)

@@ -1,9 +1,9 @@
 import std/algorithm
-import system
 import std/math
 import std/deques
 import std/sequtils
 import std/strutils
+import ../readfile
 
 const sortInt = system.cmp[int]
 
@@ -26,33 +26,29 @@ proc points(a, b: seq[int]): int =
   2 ^ wins(a, b) div 2
 
 # Read the file
-var file: File
-var line: string
 var sum1, sum2, sum3: int = 0
 
-if file.open("input"):
+# expect roughly 10 simultaneous wins
+var countWins: seq[int] = newSeqWith(10, 0) 
 
-  # expect roughly 10 simultaneous wins
-  var countWins: seq[int] = newSeqWith(10, 0) 
+for line in fileLines("input"):
+  # convert to lists
+  let win_mine = asLists(line)
 
-  while file.readLine(line):
-    # convert to lists
-    let win_mine = asLists(line)
+  # determine how many cards we won
+  let win_n = wins(win_mine[0], win_mine[1])
 
-    # determine how many cards we won
-    let win_n = wins(win_mine[0], win_mine[1])
+  # Calculate points on card
+  let points = 2 ^ win_n div 2
+  sum1 += points
+  let copies = 1 + countWins[0]
+  inc sum2, copies
+  sum3 += points * copies
+  countWins[0] = 0
+  countWins.rotateLeft(1)
 
-    # Calculate points on card
-    let points = 2 ^ win_n div 2
-    sum1 += points
-    let copies = 1 + countWins[0]
-    inc sum2, copies
-    sum3 += points * copies
-    countWins[0] = 0
-    countWins.rotateLeft(1)
-
-    for i in 0..<win_n:
-      inc countWins[i], copies
+  for i in 0..<win_n:
+    inc countWins[i], copies
 
 echo "First " & $sum1
 echo "Second " & $sum2

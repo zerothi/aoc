@@ -2,18 +2,7 @@ import std/algorithm
 import std/strutils
 import std/sequtils
 import std/sugar
-
-
-iterator fileLines(file: File): string =
-  var line: string
-  while file.readLine(line):
-    yield line
-
-iterator fileLines(file: string): string =
-  var fh: File
-  if fh.open(file):
-    for line in fh.fileLines:
-      yield line
+import ../readfile
 
 # Read the file
 var
@@ -30,7 +19,6 @@ for line in fileLines("input"):
 iterator distanceTravelled(tot_time: int): int =
   for pressed in 1..<tot_time:
     yield pressed * (tot_time - pressed) 
-
 
 var val1: int = 1
 for td in zip(times, dists):

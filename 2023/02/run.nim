@@ -1,6 +1,7 @@
 import std/strutils
 import std/re
 import std/sugar
+import ../readfile
 
 
 # Create a type of the cubes held
@@ -59,22 +60,19 @@ proc min(games: seq[Game]): Game =
   return Game(red: red, green: green, blue: blue, id: games[0].id)
   
 
-var file: File
-var line: string
 var sum1, sum2: int = 0
-if file.open("input"):
-  while file.readLine(line):
-    let games = parseLine(line)
-    var ok: bool = true
-    for game in games:
-      if game > base:
-        ok = false
-    if ok:
-      sum1 += games[0].id
+for line in fileLines("input"):
+  let games = parseLine(line)
+  var ok: bool = true
+  for game in games:
+    if game > base:
+      ok = false
+  if ok:
+    sum1 += games[0].id
 
-    # do second part
-    let min_game = games.min
-    sum2 += min_game.prod
+  # do second part
+  let min_game = games.min
+  sum2 += min_game.prod
 
 echo "First = " & $sum1
 echo "Second = " & $sum2
