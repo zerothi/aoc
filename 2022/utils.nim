@@ -10,3 +10,8 @@ iterator fileLines*(file: string): string =
     for line in fh.fileLines:
       yield line
 
+func reduce*[T](arr: openarray[T]): T =
+  for a in arr:
+    result += a
+  return result
+

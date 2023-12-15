@@ -1,8 +1,4 @@
-import std/algorithm
-import std/math
-import std/deques
-import std/sequtils
-import std/strutils
+import std/[algorithm, math, sequtils, strutils]
 import ../utils
 
 const sortInt = system.cmp[int]
@@ -21,9 +17,6 @@ proc wins(a, b: seq[int]): int =
     if b.binarySearch(i) >= 0:
       inc result
   return result
-
-proc points(a, b: seq[int]): int =
-  2 ^ wins(a, b) div 2
 
 # Read the file
 var sum1, sum2, sum3: int = 0
@@ -53,3 +46,5 @@ for line in fileLines("input"):
 echo "First " & $sum1
 echo "Second " & $sum2
 echo "(total winning points) " & $sum3
+
+print_timing()

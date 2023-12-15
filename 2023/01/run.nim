@@ -1,17 +1,5 @@
-import std/sugar
-import std/strutils
-import std/re
+import std/[strutils, re, sugar, times]
 import ../utils
-
-
-proc isint(s: string): bool =
-  try:
-    discard parseInt(s)
-    result = true
-  except:
-    result = false
-
-proc isInt(s: char): bool = isInt($s)
 
 proc calibration1(lines: openArray[string]): int = 
   ## First calibration method of day 1
@@ -45,7 +33,7 @@ proc calibration2(lines: openArray[string]): int =
   proc getCalibration(s: string): int =
     let list = collect:
       for c in s:
-        if isInt(c):
+        if c.isDigit:
           c
     if list.len == 0: return 0
     return parseInt(list[0] & list[list.high])
@@ -95,3 +83,5 @@ lines = collect:
     line
 echo calibration1(lines)
 echo calibration2(lines)
+
+print_timing()

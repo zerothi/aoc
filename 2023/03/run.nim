@@ -1,7 +1,4 @@
-import std/re
-import std/sugar
-import std/strutils
-import std/deques
+import std/[re, strutils, sugar, deques]
 import ../utils
 
 
@@ -127,3 +124,5 @@ sum2 += lines.prodOverlaps(lines[1])
 
 echo "First " & $sum1
 echo "Second " & $sum2
+
+print_timing()

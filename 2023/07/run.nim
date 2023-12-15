@@ -1,7 +1,4 @@
-import std/strutils
-import std/algorithm
-import std/sequtils
-import std/sugar
+import std/[strutils, sequtils, algorithm, sugar]
 import ../utils
 
 type
@@ -170,4 +167,4 @@ for i, bid in bids:
   sum2 += (i+1) * bid.bid
 echo "Second = ", sum2
 
-
+print_timing()

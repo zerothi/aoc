@@ -1,8 +1,4 @@
-import std/strutils
-import std/algorithm
-import std/sequtils
-import std/sugar
-import std/deques
+import std/[strutils, algorithm, sugar, deques]
 import ../utils
 
 type
@@ -195,3 +191,5 @@ for rng in loopRange(seeds):
     val2 = min(val2, rng_dest.start)
 
 echo "Second = " & $val2
+
+print_timing()

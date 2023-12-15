@@ -1,6 +1,4 @@
 import std/strutils
-import std/re
-import std/sugar
 import ../utils
 
 
@@ -77,3 +75,5 @@ for line in fileLines("input"):
 echo "First = " & $sum1
 echo "Second = " & $sum2
 
+
+print_timing()

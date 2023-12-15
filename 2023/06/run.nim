@@ -1,13 +1,11 @@
-import std/algorithm
-import std/strutils
-import std/sequtils
-import std/sugar
+import std/[strutils, sequtils, sugar]
 import ../utils
 
 # Read the file
 var
   times: seq[int]
   dists: seq[int]
+
 for line in fileLines("input"):
 
   if line.startsWith("Time"):
@@ -43,3 +41,5 @@ for myd in distanceTravelled(time):
   if myd > dist:
     inc val2
 echo "Second = " & $val2
+
+print_timing()
